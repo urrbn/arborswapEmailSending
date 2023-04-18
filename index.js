@@ -4,6 +4,7 @@ const path = require('path')
 const cors = require('cors')
 const bodyParser = require('body-parser');
 const AppliListing = require('./apis/ApplyListing')
+const Subscription = require('./apis/Subscription')
 
 // express app
 const app = express()
@@ -17,6 +18,7 @@ app.use( bodyParser.json() )
 
 // public api routes
 app.use('/api', AppliListing )
+app.use('/api', Subscription )
 
 // Start server
 app.listen(process.env.PORT, ()=>{

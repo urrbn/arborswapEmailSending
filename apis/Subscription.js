@@ -3,25 +3,16 @@ const express = require('express')
 const router = express.Router()
 const nodemailer = require("nodemailer");
 
-router.post('/applylisting', async function(req, res){
+router.post('/emailsubscription', async function(req, res){
 
     if( req.body.token === process.env.API_TOKEN ){
-
         const emailBody = `
-                <h2> Project Details </h2>
-                Project Name:   ${req.body.project_name} <br />
-                Website:        ${req.body.website} <br />
-                Description:    ${req.body.description} <br /><br />
-                <h2> Contact Info </h2>
-                Name :                  ${req.body.name} <br />
-                Email Address :         ${req.body.email} <br />
-                Telegram Handle :       ${req.body.telegram} <br />
-                Phone Number :          ${req.body.phone} <br />
-                Message or Comments :   ${req.body.message} <br />
+                <h2> Subscription Email </h2>
+                Email : ${req.body.name} <br />
         `;
         const from      = process.env.EMAIL_TO
         const to        = process.env.EMAIL_FROM
-        const subject   = "Apply Listing"
+        const subject   = "New Subscription Arborswap"
     
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
@@ -51,6 +42,7 @@ router.post('/applylisting', async function(req, res){
                 status: 500
             })
         }
+
     }else{
         res.json({
             status: 500
